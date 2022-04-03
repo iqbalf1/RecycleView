@@ -9,22 +9,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.recyclerviewsample.binar.UserAdapter
+import com.binar.recyclerviewsample.databinding.ActivityMainBinding
+import com.binar.recyclerviewsample.databinding.FragmentListBinding
+import java.util.zip.Inflater
 
 
 class ListFragment : Fragment() {
-
+    private lateinit var binding  : FragmentListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        binding = FragmentListBinding.inflate(layoutInflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycleview)
         val userList = listOf(
             Contacts("Iqbal Fadillah",85601005817),
             Contacts("Ahmad Sopian",8574371936),
@@ -36,8 +39,8 @@ class ListFragment : Fragment() {
             findNavController().navigate(action)
         })
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = userAdapter
+        binding.recycleview.layoutManager = layoutManager
+        binding.recycleview.adapter = userAdapter
     }
 
 
